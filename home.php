@@ -45,7 +45,7 @@
                     </form>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="#"><?php echo $row_session['name'] ?></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
                         <ul class="dropdown-menu">

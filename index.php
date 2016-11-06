@@ -11,12 +11,9 @@ if(isset($_POST['Submit'])){
 
   $myemail = mysqli_real_escape_string($db,$_POST['email']);
   $mypassword = mysqli_real_escape_string($db,$_POST['password']);
-  
+
   $sql = "SELECT name, username FROM User U WHERE e_mail = '$myemail' AND password = '$mypassword'";
   $result = mysqli_query($db,$sql);
-
-  // $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-  // $active = $row['active'];
 
   $count = mysqli_num_rows($result);
 
