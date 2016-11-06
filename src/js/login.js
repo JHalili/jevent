@@ -1,6 +1,7 @@
 $( document ).ready(function() {
     loadProfile();
 });
+
 function getLocalProfile(callback){
     var profileImgSrc      = localStorage.getItem("PROFILE_IMG_SRC");
     var profileName        = localStorage.getItem("PROFILE_NAME");

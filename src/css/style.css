@@ -1,0 +1,62 @@
+/* Navigation bar */
+
+.navbar-default {
+    background-color: #4471CF;
+    border-color: transparent;
+}
+
+
+/* Brand Color */
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover {
+    color: white;
+    background-color: transparent;
+}
+
+
+/* Simple Navbar item color */
+
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:focus {
+    color: white;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+/* Drop-down Navbar item color */
+
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.open>a:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+
+/* More buttons */
+
+.btn-primary {
+    color: white;
+    background-color: #4471CF;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+    color: white;
+    background-color: #3B5998;
+}
+
+/* Footer */
+
+.bs-footer .container>p {
+    text-align: center;
+}
