@@ -15,8 +15,7 @@
 <body>
     <?php include_once("analyticstracking.php");
         include_once("config.php");
-        // Enable latter when login works propely
-        //include_once("session.php");
+        include_once("session.php");
     ?>
     <!-- Dummy nav bar to move down content-->
     <nav class="navbar navbar-static-top"></nav>
@@ -24,10 +23,10 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="home.php">Campus Event</a>
             </div>
@@ -55,8 +54,12 @@
                             <li><a href="#">Create Group</a></li>
                             <li><a href="#">Manage Groups</a></li>
                             <li role="separator" class="divider"></li>
+                            <li><a href="create_event.php">Create Event</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="#">Settings</a></li>
-                            <li><a href="index.php">Log Out</a></li>
+                            <li>
+                                <a href="logout.php" onclick="logout();">Log Out</a>
+                            </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Help</a></li>
                             <li><a href="#">Report Problem</a></li>
@@ -86,7 +89,8 @@
             // For the moment store in images
             // Latter a directory will exist for every user
             $target_dir = "images/";
-            $target_file = $target_dir.basename($_FILES["ufile"]["name"]);
+            $username = $_SESSION["username"];
+            $target_file = $target_dir.$username.basename($_FILES["ufile"]["name"]);
             if(($_FILES["ufile"]["name"]) == '') {
                 $target_file = "images/texture.png";
             } else {
@@ -142,7 +146,16 @@
 
                     $data = mysqli_query($db, $query);
                     if(!$data) {
-                        echo "<h1>Could store Event Type in database.</h1>" ;
+                        echo "<h1>Could not store Event Type in database.</h1>";
+                        mysqli_rollback($db);
+                        mysqli_autocommit($db, TRUE);
+                        goto cleanup;
+                    }
+
+                    $query = "INSERT INTO EventCreated(event_Id, user_username) VALUES('$return_id', '$username')";
+                    $data = mysqli_query($db, $query);
+                    if(!data) {
+                        echo "<h1> Could not store Event Creator in database. </h1>";
                         mysqli_rollback($db);
                         mysqli_autocommit($db, TRUE);
                         goto cleanup;
