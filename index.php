@@ -11,8 +11,8 @@ if(isset($_POST['Submit'])){
 
   $myemail = mysqli_real_escape_string($db,$_POST['email']);
   $mypassword = mysqli_real_escape_string($db,$_POST['password']);
-
-  $sql = "SELECT name FROM User U WHERE e_mail = '$myemail' AND password = '$mypassword'";
+  
+  $sql = "SELECT name, username FROM User U WHERE e_mail = '$myemail' AND password = '$mypassword'";
   $result = mysqli_query($db,$sql);
 
   // $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -21,13 +21,15 @@ if(isset($_POST['Submit'])){
   $count = mysqli_num_rows($result);
 
   // If result matched $myusername and $mypassword, table row must be 1 row
-
+ $error = "";
   if($count == 1) {
-    $_SESSION['login_user'] = $myemail;
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $_SESSION['login_user'] = $row['username'];
     header("location: home.php");
   }else {
     $error = "Your Login Name or Password is invalid!";
   }
+  mysqli_free_result($result);
 }
 ?>
 
