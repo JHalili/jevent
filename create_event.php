@@ -90,7 +90,7 @@
             // Latter a directory will exist for every user
             $target_dir = "images/";
             $username = $_SESSION["login_user"];
-            $target_file = $target_dir.$username.basename($_FILES["ufile"]["name"]);
+            $target_file = $target_dir.$username."_".basename($_FILES["ufile"]["name"]);
             if(($_FILES["ufile"]["name"]) == '') {
                 $target_file = "images/texture.png";
             } else {
