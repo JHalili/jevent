@@ -14,6 +14,8 @@
         <?php include_once("analyticstracking.php");
         include_once("config.php");
         include_once("session.php");
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
         ?>
         <!-- Dummy nav bar to move down content-->
     <nav class="navbar navbar-static-top"></nav>
@@ -75,8 +77,6 @@
             </div>
             <div class="col-md-10">
                 <?php
-                error_reporting(E_ALL);
-                ini_set('display_errors', '1');
                 $query = "SELECT * from Event";
                 $data = mysqli_query($db, $query);
                 // Don't check data but still show result
@@ -96,7 +96,22 @@
                                     <?php echo $row["description"]; ?>
                                 </p>
                                 <form id="subscribe" method="post" action="home.php">
-                                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                                    <?php
+                                        $event_id = $row["id"];
+                                        $username = $_SESSION["login_user"];
+                                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST[$event_id])){
+                                            $query = "INSERT INTO Interested(event_Id, user_username) VALUES ('$event_id', '$username')";
+                                            $become_interested_data = mysqli_query($db, $query);
+                                            if(!$become_interested_data) {
+                                                echo "<h3 style='color:red'>Could not subscribe.</h3>";
+                                            }
+                                        }
+                                        $query = "SELECT * FROM Interested WHERE event_Id = '$event_id' AND user_username = '$username'";
+                                        $interested_data = mysqli_query($db, $query);
+                                        if(!mysqli_fetch_array($interested_data, MYSQLI_ASSOC)):
+                                    ?>
+                                    <button type="submit" class="btn btn-primary" name="<?php echo $event_id;?>">Subscribe</button>
+                                    <?php endif; ?>
                                     <a class="btn" href="#">More</a>
                                 </form>
                             </div>
@@ -118,12 +133,12 @@
         <div class="col-md-1">
         </div>
     </div>
-<footer class="bs-footer" role="contentinfo">
-    <div class="container">
-        <p>jevent.tk © 2016 <a href="imprint.php">Imprint</a>
-    </div>
-</footer>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+    <footer class="bs-footer" role="contentinfo">
+        <div class="container">
+            <p>jevent.tk © 2016 <a href="imprint.php">Imprint</a>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -89,7 +89,7 @@
             // For the moment store in images
             // Latter a directory will exist for every user
             $target_dir = "images/";
-            $username = $_SESSION["username"];
+            $username = $_SESSION["login_user"];
             $target_file = $target_dir.$username.basename($_FILES["ufile"]["name"]);
             if(($_FILES["ufile"]["name"]) == '') {
                 $target_file = "images/texture.png";
@@ -152,9 +152,9 @@
                         goto cleanup;
                     }
 
-                    $query = "INSERT INTO EventCreated(event_Id, user_username) VALUES('$return_id', '$username')";
+                    $query = "INSERT INTO Event_Created(event_Id, user_username) VALUES('$return_id', '$username')";
                     $data = mysqli_query($db, $query);
-                    if(!data) {
+                    if(!$data) {
                         echo "<h1> Could not store Event Creator in database. </h1>";
                         mysqli_rollback($db);
                         mysqli_autocommit($db, TRUE);
