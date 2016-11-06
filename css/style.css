@@ -1,3 +1,8 @@
+/* Body */
+body {
+    padding-bottom: 35px;
+}
+
 /* Navigation bar */
 
 .navbar-default {
@@ -67,4 +72,13 @@
 
 .bs-footer .container>p {
     text-align: center;
+}
+
+.thumbnail>img {
+    height: 200px;
+    width: 600px;
+}
+
+.thumbnail .caption>p {
+    height: 80px;
 }

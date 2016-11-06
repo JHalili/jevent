@@ -13,7 +13,9 @@
 </head>
 
 <body>
-  <?php include_once("analyticstracking.php") ?>
+  <?php include_once("analyticstracking.php");
+    include_once("config.php"); 
+  ?>
   <!-- Dummy nav bar to move down content-->
     <nav class="navbar navbar-static-top"></nav>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -69,138 +71,47 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail First" src="images/city.jpg">
-                            <div class="caption">
-                                <h3>Event 1</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
+                <?php
+                    error_reporting(E_ALL);
+                    ini_set('display_errors', '1');
+                    $query = "SELECT * from Event";
+                    $data = mysqli_query($db, $query);
+                    // Don't check data but still show result
+                    $item_row = 0;
+                    while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)):
+                        if($item_row == 0):
+                ?>
+                    <div class="row">
+                        <?php endif; ?>
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <img class="homepage-image" src="<?php echo $row["picture_url"]; ?>"
+                                onerror="this.src='images/texture.jpg'">
+                                <div class="caption">
+                                    <h3><?php echo $row["title"]; ?> </h3>
+                                    <p>
+                                        <?php echo $row["description"]; ?>
+                                    </p>
+                                    <form id="subscribe" method="post" action="home.php">
+                                         <button type="submit" class="btn btn-primary">Subscribe</button>
+                                         <a class="btn" href="#">More</a>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                        <?php
+                            $item_row = $item_row + 1;
+                            if($item_row == 3):
+                                $item_row = 0;
+                        ?>
                     </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail Second" src="images/tech.jpg">
-                            <div class="caption">
-                                <h3>Event 2</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
+                        <?php endif; ?>
+
+                <?php endwhile; 
+                    if($item_row != 0):
+                ?>
                     </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail Third" src="images/person.jpg">
-                            <div class="caption">
-                                <h3>Event 3</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail First" src="images/sport.jpg">
-                            <div class="caption">
-                                <h3>Event 4</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail Second" src="images/flower.jpg">
-                            <div class="caption">
-                                <h3>Event 5</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail Third" src="images/food.jpg">
-                            <div class="caption">
-                                <h3>Event 6</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail First" src="images/texture.jpg">
-                            <div class="caption">
-                                <h3>Event 7</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail Second" src="images/cats.jpg">
-                            <div class="caption">
-                                <h3>Event 8</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="Bootstrap Thumbnail Third" src="images/car.jpg">
-                            <div class="caption">
-                                <h3>Event 9</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">More</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endif; ?>
             </div>
             <div class="col-md-1">
             </div>
