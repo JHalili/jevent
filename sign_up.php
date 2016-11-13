@@ -32,7 +32,7 @@ if(isset($_POST["Sign_up"])){
     $sql = "INSERT INTO User (username, name, birthdate, e_mail, password) VALUES
     ('$myusername', '$myname', '$mybirthdate', '$myemail', '$mypassword')";
     $result = mysqli_query($db,$sql);
-    $_SESSION['login_user'] = $myemail;
+    $_SESSION['login_user'] = $myusername;
     header("location: home.php");
   }
 }

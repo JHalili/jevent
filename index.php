@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <?php
 if(isset($_POST['Submit'])){
-  error_reporting(E_ALL);
-  ini_set('display_errors', '1');
   include("config.php");
   session_start();
   if($db == false){
     echo "failed to connect\n";
+    die();
   }
 
   $myemail = mysqli_real_escape_string($db,$_POST['email']);

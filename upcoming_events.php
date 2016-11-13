@@ -10,26 +10,22 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
     </head>
-<body>
-    <?php include_once("analyticstracking.php");
-        include_once("config.php");
-        include_once("session.php");
+    <body>
+    <?php include_once('session.php');
         include_once('navbar.php');
         $username = $_SESSION["login_user"];
         $file_name = basename(__FILE__);
     ?>
+
     <div class="container">
         <div class="row">
             <div class="col-md-1">
-                <span class="label label-default" contenteditable="false">All Available</span>
+                <span class="label label-default" contenteditable="false">Upcoming</span>
             </div>
             <div class="col-md-10">
-            <!-- Add private events for which you are invited as well -->
                 <?php
-                $query = "(SELECT DISTINCT E.* from Event E, PublicEvent P WHERE E.id = P.public_event_id)";
-                $query .= " UNION ";
-                $query .= "(SELECT DISTINCT E.* from Event E, Invited I WHERE E.id = I.privateEvent_Id AND I.user_username = '$username')";
-                $query .= ";";
+                $username = $_SESSION["login_user"];
+                $query = "SELECT * from Event E WHERE E.start_time >= NOW() ORDER BY E.start_time";
                 $data = mysqli_query($db, $query);
                 // Don't check data but still show result
                 $item_row = 0;
@@ -58,7 +54,7 @@
         </div>
         </div>
     </div>
-
+    
     <footer class="bs-footer" role="contentinfo">
         <div class="container">
             <p>jevent.tk © 2016 <a href="imprint.php">Imprint</a>

@@ -47,17 +47,41 @@ body {
 }
 
 
-/* More buttons */
+/* Buttons */
 
 .btn-primary {
-    color: white;
     background-color: #4471CF;
+    border: 0px;
 }
 
 .btn-primary:focus,
-.btn-primary:hover {
-    color: white;
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:active:focus {
     background-color: #3B5998;
+    border:0px;
+}
+
+.btn-red {
+    background-color: #F44336;
+}
+
+.btn-red:focus,
+.btn-red:hover,
+.btn-red:active,
+.btn-red:active:focus {
+    background-color: red;
+}
+
+.btn-green {
+    background-color: #4CAF50;
+}
+
+.btn-green:focus,
+.btn-green:hover,
+.btn-green:active,
+.btn-green:active:focus {
+    background-color: green;
 }
 
 
@@ -75,8 +99,8 @@ body {
 }
 
 .thumbnail>img {
-    height: 200px;
-    width: 600px;
+    max-height: 200px;
+    max-width: 100%;
 }
 
 .thumbnail .caption>p {
